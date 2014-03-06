@@ -171,7 +171,7 @@
         /**
          * ForeSee cxReplay requires foreseetrigger, let's say
          */
-        "foreseecxreplay": ["foreseetrigger"]
+        "fores2ecxreplay": ["foreseetrigger"]
     };
 
     /**
