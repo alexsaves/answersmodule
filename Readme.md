@@ -83,7 +83,6 @@ When the `answermodule.js` gets build, we assemble the `config/config.js` custom
             }
         },
 
-
         youtube: {
             /**
              * Checks to see if this page has this product or not
@@ -102,4 +101,45 @@ When the `answermodule.js` gets build, we assemble the `config/config.js` custom
             check: true
         }
     };
+
+This is a product whitelist, essentially. When `answermodule.js` is invoked, we look at each of these entries and evaluate whether we should include each product on this page.
+
+We do this by way of a `check` attribute. In the first case we have a function:
+
+    check: function(config) {
+        return (!!config["hasWebCollageHereOrSomethign"]);
+    }
+
+The gateway script passes the config that was found on the page to the check function and we look at that to determine if Web Collage is needed on this page.
+
+In the second example (youtube), we do a little bit of processing:
+
+    check: function(config) {
+        return document.querySelectorAll('*[role=youtube]').length > 0;
+    }
+
+We look for decorated HTML nodes on the page that have our special annotations. In this case, we're looking for tags that have the `role="youtube"` attribute. In `test.html` we have a node like this:
+
+    <div role="youtube" data="ubGpDoyJvmI"></div>
+
+It will notice this and return `true`. I'll talk more about this further down.
+
+## Modules
+
+The modules themselves are defined using the standard AMD definition:
+
+    define(modulename, dependencies, factory);
+
+So one of our examples, let's look at `foreseecxreplay`:
+
+    /**
+     * Module for handling foresee cxreplay
+     */
+    define("foreseecxreplay", ["foreseetrigger"], function (ForeSeeTrigger) {
+
+        console.log("running foresee cxreplay yah", AnswersML, ForeSeeTrigger);
+
+    });
+
+It's pretty each to see what's going on here. The module `foreseecxreplay` depends on `foreseetrigger`. The module loader will resolve these dependencies before calling the factory.
 
