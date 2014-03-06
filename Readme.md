@@ -4,9 +4,13 @@ This a possible approach for delivering a number of client-side products, and po
 
 This prototype uses the [AMD](http://en.wikipedia.org/wiki/Asynchronous_module_definition) pattern to define products and dependencies. Rather than rolling our code into a single (large) payload, we benefit from some degree of parallelism, and only retrieve the products we need on the pages we need them on.
 
-## SPDY
+Here's the general architecture of the gateway script:
 
-We might seriously consider looking at SPDY (if we are not already) for our CDN. Going forward, this could provide significant benefits for getting these assets down to the client browser due to the streaming nature of the protocol. Right now SPDY support is hit and miss, but load-time improvements can be between 30% and 60%. [Some more information](http://www.webperformancetoday.com/tag/spdy/)
+![Overall Architecture](https://raw.github.com/alexsaves/answersmodule/master/assets/uber_arch1.png)
+
+The individual modules below the gateway script are meant to be parallel requests. What isn't shown in this diagram is the resolution of interdependencies between these modules. Here is a workflow showing the basic flow:
+
+![Workflow](https://raw.github.com/alexsaves/answersmodule/master/assets/uber_workflow1.png)
 
 ## Rollups vs parallel loading
 
@@ -194,3 +198,7 @@ This is not required, but will speed up retrieval. This is a technique used by [
 ## Cacheing
 
 In this example, the client is performing `HEAD` requests on the web server, to show clearly what is happening network-wise. In production we might set our cache headers to invoke more aggressive cacheing, by setting a proper expiry-date on these files. After the first page, these would be nearly instantaneous.
+
+## SPDY
+
+We might seriously consider looking at SPDY (if we are not already) for our CDN. Going forward, this could provide significant benefits for getting these assets down to the client browser due to the streaming nature of the protocol. Right now SPDY support is hit and miss, but load-time improvements can be between 30% and 60%. [Some more information](http://www.webperformancetoday.com/tag/spdy/)
