@@ -16,7 +16,7 @@ One question is, should we be combining and minifying all the payloads together,
  * By breaking the products up we can only load the things we need on the pages we need. Leveraging that and cacheing means you might never need to load everything at the same time, which is nice.
  * In the absense of protocols like SPDY, modern browsers are actually better at pulling things down in parallel like this.
 
-Max concurrent connections per hostname by browser:
+Max concurrent connections **per hostname** by browser:
 
  * Firefox 3.6.x + : 6
  * Internet Explorer 9.x: 6
@@ -27,7 +27,7 @@ Max concurrent connections per hostname by browser:
  * Opera 11.x: 8
  * Safari 5.x: 6
 
- It's important to note these are per-hostname limits. They're set as much to protect web servers as they are to help surfers. Given these assets will all be coming from a specific hostname (separate from our customers), we can assume we'll have all of them.
+It's important to note these are **per-hostname** limits. They're set as much to protect web servers as they are to help surfers. Given these assets will all be coming from a specific hostname (separate from our customers), we can assume we'll have all of them.
 
 ## Limitations of this example
 
@@ -174,4 +174,21 @@ Without any optimizations, what you would see with this demo, if you looked at t
 
 ![Unoptimized Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/timeline1.png)
 
-Notice that all the modules are loaded in parallel except for `foreseetrigger.js`.
+Notice that all the modules are loaded in parallel except for `foreseetrigger.js`. This is because the dependency for this file wasn't encountered until `foreseecxreplay.js` was retrieved. We can optimize this. By providing a prerequisite "hint" object we can pre-retrieve this file. In the demo, I do this by defining prerequisite hints inside `prereqs.js` which gets built into `answermodule.js`.
+
+    /**
+     * Helps us by preloading known dependencies. Saves time on first load, but not absolutely necessary
+     * @type {{foreseecxreplay: string[]}}
+     */
+    var preload_dependencies = {
+        /**
+         * ForeSee cxReplay requires foreseetrigger, let's say
+         */
+        "foreseecxreplay": ["foreseetrigger"]
+    };
+
+This is not required, but will speed up retrieval. This is a technique used by [RequireJS](https://github.com/jrburke/requirejs). Here's the new netstat:
+
+![Optimized Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/timeline2.png)
+
+## Cacheing
