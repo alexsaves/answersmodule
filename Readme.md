@@ -201,4 +201,4 @@ In this example, the client is performing `HEAD` requests on the web server, to 
 
 ## SPDY
 
-We might seriously consider looking at SPDY (if we are not already) for our CDN. Going forward, this could provide significant benefits for getting these assets down to the client browser due to the streaming nature of the protocol. Right now SPDY support is hit and miss, but load-time improvements can be between 30% and 60%. [Some more information](http://www.webperformancetoday.com/tag/spdy/)
+We might seriously consider looking at [SPDY](http://en.wikipedia.org/wiki/SPDY) (if we are not already) for our CDN. Going forward, this could provide significant benefits for getting these assets down to the client browser due to the streaming nature of the protocol. Right now SPDY support is hit and miss, but load-time improvements can be between 30% and 60%. [Some more information](http://www.webperformancetoday.com/tag/spdy/)
