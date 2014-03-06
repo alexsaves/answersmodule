@@ -1,0 +1,41 @@
+{
+    "name": "answermodule",
+    "version": "0.0.1",
+    "description": "Module loading framework for Answers.com",
+    "main": "gulpfule.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Alexei White",
+    "license": "ISC",
+    "dependencies": {
+        "connect": "*",
+        "strftime": "*",
+        "colors": "*",
+        "gulp": "*",
+        "gulp-less": "*",
+        "gulp-jshint": "*",
+        "gulp-concat": "*",
+        "gulp-rename": "*",
+        "gulp-uglify": "*",
+        "gulp-clean": "*",
+        "gulp-exec": "*",
+        "gulp-replace": "*",
+        "gulp-minify-css": "*",
+        "gulp-jsonlint": "*",
+        "gulp-closure-compiler": "*",
+        "gulp-header": "*",
+        "gulp-footer": "*",
+        "jshint-stylish": "*",
+        "through": "*",
+        "gulp-util": "*",
+        "gulp-ignore": "*",
+        "gulp-htmlmin": "*",
+        "gulp-beautify": "*",
+        "gulp-jsdoc": "*",
+        "gulp-template": "*",
+        "beautifier": "*",
+        "compression": "*",
+        "body-parser": "*"
+    }
+}
