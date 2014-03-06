@@ -3,5 +3,5 @@ var preload_dependencies = {
     /**
      * ForeSee cxReplay requires foreseetrigger, let's say
      */
-    "fores2ecxreplay": ["foreseetrigger"]
+    "foreseecxreplay": ["foreseetrigger"]
 };

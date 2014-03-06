@@ -143,3 +143,10 @@ So one of our examples, let's look at `foreseecxreplay`:
 
 It's pretty each to see what's going on here. The module `foreseecxreplay` depends on `foreseetrigger`. The module loader will resolve these dependencies before calling the factory.
 
+## Looking at the demo
+
+Without any optimizations, what you would see with this demo, if you looked at the network activity would be something like this:
+
+![Unoptimized Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/timeline1.png)
+
+We can impro
