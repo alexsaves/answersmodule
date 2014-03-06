@@ -41,7 +41,7 @@ The point of this project to to illustrate an approach as a conversation piece.
 
 ## Building this project
 
-Pull down the repo and install the dependencies (`sudo npm install`). Then you can build to the dist/ folder by running the default gulp task: `gulp`.
+You'll need NodeJS and `npm`. Pull down the repo and install the dependencies (`sudo npm install`). Then you can build to the dist/ folder by running the default gulp task: `gulp`.
 
 When the web server is running, point your browser at `http://localhost:3131/test.html`.
 
