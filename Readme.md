@@ -192,3 +192,5 @@ This is not required, but will speed up retrieval. This is a technique used by [
 ![Optimized Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/timeline2.png)
 
 ## Cacheing
+
+In this example, the client is performing `HEAD` requests on the web server, to show clearly what is happening network-wise. In production we might set our cache headers to invoke more aggressive cacheing, by setting a proper expiry-date on these files. After the first page, these would be nearly instantaneous.
