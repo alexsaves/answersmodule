@@ -8,7 +8,7 @@ This prototype uses the [AMD](http://en.wikipedia.org/wiki/Asynchronous_module_d
 
 We might seriously consider looking at SPDY (if we are not already) for our CDN. Going forward, this could provide significant benefits for getting these assets down to the client browser due to the streaming nature of the protocol. Right now SPDY support is hit and miss, but load-time improvements can be between 30% and 60%. [Some more information](http://www.webperformancetoday.com/tag/spdy/)
 
-## Rollups vs Parralel loading
+## Rollups vs parallel loading
 
 One question is, should we be combining and minifying all the payloads together, or loading them separately. A couple of points to be made here:
 
@@ -16,17 +16,18 @@ One question is, should we be combining and minifying all the payloads together,
  * By breaking the products up we can only load the things we need on the pages we need. Leveraging that and cacheing means you might never need to load everything at the same time, which is nice.
  * In the absense of protocols like SPDY, modern browsers are actually better at pulling things down in parallel like this.
 
-Max concurrent connections by browser:
+Max concurrent connections per hostname by browser:
 
- * Firefox 4.x: 6 (ref missing)
- * Firefox 3.6.x: 6
+ * Firefox 3.6.x + : 6
  * Internet Explorer 9.x: 6
  * Internet Explorer 8.x: dialup: 2, broadband: 6
  * Internet Explorer 7.x: dialup: 2, broadband: 2
  * Chrome 11.x: 6
  * Chrome 10.x: 6
  * Opera 11.x: 8
- * Safari 5.x: 6 (ref missing)
+ * Safari 5.x: 6
+
+ It's important to note these are per-hostname limits. They're set as much to protect web servers as they are to help surfers. Given these assets will all be coming from a specific hostname (separate from our customers), we can assume we'll have all of them.
 
 ## Limitations of this example
 
