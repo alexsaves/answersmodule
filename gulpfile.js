@@ -9,7 +9,6 @@ var header = require('gulp-header');
 var footer = require('gulp-footer');
 var colors = require('colors');
 var fs = require('fs');
-var closureCompiler = require('gulp-closure-compiler');
 var webserverlib = require('./lib/webserver.js');
 var ws = new webserverlib();
 
@@ -24,8 +23,6 @@ var buildModule = function(modulename) {
     console.log(("Building " + modulename + "...").yellow);
     gulp.src('./src/modules/' + modulename + '/**/*.*')
         .pipe(concat(modulename + '.js'))
-        .pipe(header('(function() {'))
-        .pipe(footer('})()'))
         .pipe(beautify())
         .pipe(gulp.dest('./dist/' + distfolder));
 };

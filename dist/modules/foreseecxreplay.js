@@ -1,10 +1,8 @@
-(function () {
-    /**
-     * Module for handling foresee cxreplay
-     */
-    define("foreseecxreplay", ["foreseetrigger"], function (ForeSeeTrigger) {
+/**
+ * Module for handling foresee cxreplay
+ */
+define("foreseecxreplay", ["foreseetrigger"], function (ForeSeeTrigger) {
 
-        console.log("running foresee cxreplay yah", AnswersML, ForeSeeTrigger);
+    console.log("running foresee cxreplay yah", AnswersML, ForeSeeTrigger);
 
-    });
-})()
+});
