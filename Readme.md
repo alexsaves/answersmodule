@@ -55,5 +55,51 @@ Notice what's going on here. At the top, we have a small configuration block, wh
 
 The rest of the code does the job of inserting an async script tag in a non-blocking and backwards compatible way.
 
+## Contents of the /dist folder
+
+In dist we have:
+
+    test.html - A test harness demonstrating a couple different paradigms for embedding content and activating products.
+    answermodule.js - The gateway script. This is the main script loaded by the page in all cases.
+    modules/ - This folder contains the modules we're going to load.
+
 ## Customer-specific configuration
+
+When the `answermodule.js` gets build, we assemble the `config/config.js` customer-specific configuration file. In this example, here's what it contains:
+
+    /**
+     * Customer-specific configuration file
+     */
+    AnswersProductWhitelist = {
+
+        webcollage: {
+            /**
+             * Checks to see if this page has this product or not
+             * @param config
+             * @returns {boolean}
+             */
+            check: function(config) {
+                return (!!config["hasWebCollageHereOrSomethign"]);
+            }
+        },
+
+
+        youtube: {
+            /**
+             * Checks to see if this page has this product or not
+             * @param config
+             * @returns {boolean}
+             */
+            check: function(config) {
+                return document.querySelectorAll('*[role=youtube]').length > 0;
+            }
+        },
+
+        foreseecxreplay: {
+            /**
+             * In this case it just says it has it
+             */
+            check: true
+        }
+    };
 
