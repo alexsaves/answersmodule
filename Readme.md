@@ -4,6 +4,30 @@ This a possible approach for delivering a number of client-side products, and po
 
 This prototype uses the [AMD](http://en.wikipedia.org/wiki/Asynchronous_module_definition) pattern to define products and dependencies. Rather than rolling our code into a single (large) payload, we benefit from some degree of parallelism, and only retrieve the products we need on the pages we need them on.
 
+## SPDY
+
+We might seriously consider looking at SPDY (if we are not already) for our CDN. Going forward, this could provide significant benefits for getting these assets down to the client browser due to the streaming nature of the protocol. Right now SPDY support is hit and miss, but load-time improvements can be between 30% and 60%. [Some more information](http://www.webperformancetoday.com/tag/spdy/)
+
+## Rollups vs Parralel loading
+
+One question is, should we be combining and minifying all the payloads together, or loading them separately. A couple of points to be made here:
+
+ * In ForeSee's case, we're doing a lot of rollups already, but we would actually benefit from splitting our larger files up into at least a couple smaller chunks due to parallelism.
+ * By breaking the products up we can only load the things we need on the pages we need. Leveraging that and cacheing means you might never need to load everything at the same time, which is nice.
+ * In the absense of protocols like SPDY, modern browsers are actually better at pulling things down in parallel like this.
+
+Max concurrent connections by browser:
+
+ * Firefox 4.x: 6 (ref missing)
+ * Firefox 3.6.x: 6
+ * Internet Explorer 9.x: 6
+ * Internet Explorer 8.x: dialup: 2, broadband: 6
+ * Internet Explorer 7.x: dialup: 2, broadband: 2
+ * Chrome 11.x: 6
+ * Chrome 10.x: 6
+ * Opera 11.x: 8
+ * Safari 5.x: 6 (ref missing)
+
 ## Limitations of this example
 
 This isn't a polished product. One that that's glaringly missing from this demo is any `domready` governing. It's possible we'd run into some race conditions on some machines, particularly IE without this.
@@ -149,4 +173,4 @@ Without any optimizations, what you would see with this demo, if you looked at t
 
 ![Unoptimized Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/timeline1.png)
 
-We can impro
+Notice that all the modules are loaded in parallel except for `foreseetrigger.js`.
