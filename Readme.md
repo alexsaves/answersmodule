@@ -178,6 +178,10 @@ Without any optimizations, what you would see with this demo, if you looked at t
 
 ![Unoptimized Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/timeline1.png)
 
+Even though the request for `foreseetrigger.js` occurs **after** `foreseecxreplay.js`, the dependency order is reverse. Fortunately, because of the require dependencies, the execution order is correct:
+
+![Console output](https://raw.github.com/alexsaves/answersmodule/master/assets/console.png)
+
 Notice that all the modules are loaded in parallel except for `foreseetrigger.js`. This is because the dependency for this file wasn't encountered until `foreseecxreplay.js` was retrieved. We can optimize this. By providing a prerequisite "hint" object we can pre-retrieve this file. In the demo, I do this by defining prerequisite hints inside `prereqs.js` which gets built into `answermodule.js`.
 
     /**
