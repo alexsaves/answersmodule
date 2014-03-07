@@ -49,7 +49,7 @@ The individual modules below the gateway script are meant to be parallel request
 
 ![Workflow](https://raw.github.com/alexsaves/answersmodule/master/assets/uber_workflow1.png)
 
-## Monolith AMD
+## Rollup AMD
 
 In this case, we've kept the AMD pattern, but are rolling all the files into a single file. We still only execute the factories that apply to that configuration.
 
@@ -99,7 +99,7 @@ The benefits of parallelism increase with the size of the files involved.
 You'll need NodeJS and `npm`. Pull down the repo and install the dependencies (`sudo npm install`). Then you can build one of the two examples using the appropriate gulp tasks:
 
  * `gulp parallel` - Build the parallel loading example.
- * `gulp monolith` - Build the single-file version.
+ * `gulp rollup` - Build the single-file version.
 
 When the web server is running, point your browser at `http://localhost:3131/test.html`.
 
@@ -237,15 +237,15 @@ This is not required, but will speed up retrieval. This is a technique used by [
 
 ![Optimized Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/timeline2.png)
 
-## Monolith AMD Demo
+## Rollup AMD Demo
 
 With all the files rolled into one larger module, the network traffic looks like this.
 
-![Monolith Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/monolithperf.png)
+![Rollup Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/monolithperf.png)
 
 Looking at the console log, we see that the same dependencies are being honored.
 
-![Monolith Console Log](https://raw.github.com/alexsaves/answersmodule/master/assets/deplogmonolith.png)
+![Rollup Console Log](https://raw.github.com/alexsaves/answersmodule/master/assets/deplogmonolith.png)
 
 ## Cacheing
 

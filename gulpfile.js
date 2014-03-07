@@ -62,9 +62,9 @@ gulp.task('parallel', function (cb) {
 });
 
 // Assemble the module loader and fixtures
-gulp.task('monolith', function () {
+gulp.task('rollup', function () {
 
-    console.log("Building monolith gateway..".yellow);
+    console.log("Building rollup gateway js..".yellow);
 
     var sn = new syncer();
 
