@@ -216,7 +216,6 @@ Notice that all the modules are loaded in parallel except for `foreseetrigger.js
 
     /**
      * Helps us by preloading known dependencies. Saves time on first load, but not absolutely necessary
-     * @type {{foreseecxreplay: string[]}}
      */
     var preload_dependencies = {
         /**
@@ -231,9 +230,13 @@ This is not required, but will speed up retrieval. This is a technique used by [
 
 ## Monolith AMD Demo
 
-Without any optimizations, what you would see with this demo, if you looked at the network activity would be something like this:
+With all the files rolled into one larger module, the network traffic looks like this.
 
 ![Monolith Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/monolithperf.png)
+
+Looking at the console log, we see that the same dependencies are being honored.
+
+![Monolith Console Log](https://raw.github.com/alexsaves/answersmodule/master/assets/deplogmonolith.png)
 
 ## Cacheing
 
