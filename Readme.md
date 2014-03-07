@@ -34,7 +34,6 @@ One question is, should we be combining and minifying all the payloads together,
 
  * In ForeSee's case, we're doing a lot of rollups already, but we would actually benefit from splitting our larger files up into at least a couple smaller chunks due to parallelism.
  * By breaking the products up we can only load the things we need on the pages we need. Leveraging that and cacheing means you might never need to load everything at the same time, which is nice.
- * In the absense of protocols like SPDY, modern browsers are actually better at pulling things down in parallel like this.
 
 Max concurrent connections **per hostname** by browser:
 
