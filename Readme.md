@@ -6,18 +6,36 @@ This prototype uses the [AMD](http://en.wikipedia.org/wiki/Asynchronous_module_d
 
 ## Disclaimer
 
-I'd like to emphasize, that these are only two possible approaches. There are other ways to do this, and we should be open to all of them at this early stage.
+I'd like to emphasize, these are only two possible approaches. There are other ways to do this, and we should be open to all of them at this early stage.
 
 Also, **this isn't a polished product**. I've made some comprimises for the sake of being able to demonstrate both parallel loading and a monolith payload. One that that's glaringly missing from this demo is any `domready` governing. It's possible we'd run into some race conditions on some machines, particularly IE without this.
 
 The point of this project to to illustrate a couple approaches as a conversation piece. Once we settle on an approach, or if we formally decide to do both, we would take the time to improve this system.
-
 
 ## Why AMD?
 
 Until we truly have a unified JavaScript, we'll probably want to consider issues like scope isolation and interfaces. Our respective code bases may look very different, but AMD offers an industry standard way of packaging them without leaking all over each other - and forces us to define clear interfaces with each other.
 
 Also, ForeSee started packaging their code as AMD modules a few months ago, due to several requests from customers. If we stick with this paradigm, irrespective of whether we roll all the code into a single file or not, we can have some flexibility in how we package it and give it to customers.
+
+## AMD Modules
+
+The modules themselves are defined using the standard AMD definition:
+
+    define(modulename, dependencies, factory);
+
+So one of our examples, let's look at `foreseecxreplay`:
+
+    /**
+     * Module for handling foresee cxreplay
+     */
+    define("foreseecxreplay", ["foreseetrigger"], function (ForeSeeTrigger) {
+
+        console.log("running foresee cxreplay yah", AnswersML, ForeSeeTrigger);
+
+    });
+
+It's pretty each to see what's going on here. The module `foreseecxreplay` depends on `foreseetrigger`. The module loader will resolve these dependencies before calling the factory.
 
 ## Parallel AMD
 
@@ -190,25 +208,6 @@ We look for decorated HTML nodes on the page that have our special annotations. 
     <div role="youtube" data="ubGpDoyJvmI"></div>
 
 It will notice this and return `true`. I'll talk more about this further down.
-
-## Modules
-
-The modules themselves are defined using the standard AMD definition:
-
-    define(modulename, dependencies, factory);
-
-So one of our examples, let's look at `foreseecxreplay`:
-
-    /**
-     * Module for handling foresee cxreplay
-     */
-    define("foreseecxreplay", ["foreseetrigger"], function (ForeSeeTrigger) {
-
-        console.log("running foresee cxreplay yah", AnswersML, ForeSeeTrigger);
-
-    });
-
-It's pretty each to see what's going on here. The module `foreseecxreplay` depends on `foreseetrigger`. The module loader will resolve these dependencies before calling the factory.
 
 ## Parallel AMD Demo
 
