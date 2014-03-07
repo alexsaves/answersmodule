@@ -14,7 +14,7 @@ define("youtube", function () {
         embednode.src = "//www.youtube.com/embed/" + youtubenodes[i].getAttribute("data");
         embednode.frameBorder = 0;
         embednode.allowFullScreen = true;
-        youtubenodes[i].appendChild(embednode);
+        //youtubenodes[i].appendChild(embednode);
     }
 
 });

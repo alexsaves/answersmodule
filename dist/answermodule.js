@@ -195,7 +195,7 @@
                 w = window,
                 am = d.createElement('script'),
                 aex = {
-                    'src': '/modules/' + modulename + '.js',
+                    'src': 'modules/' + modulename + '.js',
                     'type': 'text/javascript',
                     'async': 'true'
                 };
