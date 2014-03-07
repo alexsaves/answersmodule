@@ -26,6 +26,8 @@ The individual modules below the gateway script are meant to be parallel request
 
 In this case, we've kept the AMD pattern, but are rolling all the files into a single file. We still only execute the factories that apply to that configuration.
 
+![Overall Architecture](https://raw.github.com/alexsaves/answersmodule/master/assets/monolith.png)
+
 ## Rollups vs parallel loading
 
 One question is, should we be combining and minifying all the payloads together, or loading them separately. A couple of points to be made here:
