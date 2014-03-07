@@ -3,7 +3,7 @@
  * @type {{}}
  * @private
  */
-_moduleRecord = {};
+_definedModules = {};
 
 /**
  * Check dependencies
@@ -12,14 +12,14 @@ _moduleRecord = {};
 var checkDependencies = function(modulerec) {
     var hasAll = true;
     for (var dep in modulerec.dependencies) {
-        if (!_moduleRecord[modulerec.dependencies[dep]]) {
+        if (!_definedModules[modulerec.dependencies[dep]]) {
             answersRequire(modulerec.dependencies[dep]);
             hasAll = false;
         }
         if (preload_dependencies[dep]) {
             // We know we'll need some others
             for (var odep in preload_dependencies[dep]) {
-                if (!_moduleRecord[preload_dependencies[dep][odep]]) {
+                if (!_definedModules[preload_dependencies[dep][odep]]) {
                     // Go get this one also
                     answersRequire(preload_dependencies[dep][odep]);
                 }
@@ -45,23 +45,26 @@ window["define"] = (typeof(window["define"]) != 'undefined' && window["define"].
      * Make a record of the thing
      * @type {{dependencies: *, factory: *}}
      */
-    _moduleRecord[modulename] = {
+    _definedModules[modulename] = {
         name: modulename,
         dependencies: dependencies,
         factory: factory,
         executed: false
     };
 
-    // Go see if we need to load any dependencies
-    checkDependencies(_moduleRecord[modulename]);
+    // Force the reconciliations to happen asynchronously
+    setTimeout(function() {
+        // Go see if we need to load any dependencies
+        checkDependencies(_definedModules[modulename]);
 
-    // Try to run any non executed modules
-    for (var md in _moduleRecord) {
-        var mdl = _moduleRecord[md];
-        if (!mdl.executed) {
-            runModule(md);
+        // Try to run any non executed modules
+        for (var md in _definedModules) {
+            var mdl = _definedModules[md];
+            if (!mdl.executed && _requiredModules[md]) {
+                runModule(md);
+            }
         }
-    }
+    }, 0);
 
 };
 

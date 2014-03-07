@@ -14,7 +14,6 @@ AnswersProductWhitelist = {
         }
     },
 
-
     youtube: {
         /**
          * Checks to see if this page has this product or not

@@ -15,7 +15,6 @@
             }
         },
 
-
         youtube: {
             /**
              * Checks to see if this page has this product or not
@@ -31,7 +30,7 @@
             /**
              * In this case it just says it has it
              */
-            check: true
+            check: false
         }
     };
     /**
@@ -51,7 +50,8 @@
 
             // Loop over the config and test all the rules
             for (var prod in AnswersProductWhitelist) {
-                if (AnswersProductWhitelist[prod].check === true || AnswersProductWhitelist[prod].check(config)) {
+                var prd = AnswersProductWhitelist[prod];
+                if (prd.check === true || (typeof(prd.check) == 'function' && prd.check(config))) {
                     answersRequire(prod);
                 }
             }
@@ -71,7 +71,7 @@
      * @type {{}}
      * @private
      */
-    _moduleRecord = {};
+    _definedModules = {};
 
     /**
      * Check dependencies
@@ -80,14 +80,14 @@
     var checkDependencies = function (modulerec) {
         var hasAll = true;
         for (var dep in modulerec.dependencies) {
-            if (!_moduleRecord[modulerec.dependencies[dep]]) {
+            if (!_definedModules[modulerec.dependencies[dep]]) {
                 answersRequire(modulerec.dependencies[dep]);
                 hasAll = false;
             }
             if (preload_dependencies[dep]) {
                 // We know we'll need some others
                 for (var odep in preload_dependencies[dep]) {
-                    if (!_moduleRecord[preload_dependencies[dep][odep]]) {
+                    if (!_definedModules[preload_dependencies[dep][odep]]) {
                         // Go get this one also
                         answersRequire(preload_dependencies[dep][odep]);
                     }
@@ -113,23 +113,26 @@
          * Make a record of the thing
          * @type {{dependencies: *, factory: *}}
          */
-        _moduleRecord[modulename] = {
+        _definedModules[modulename] = {
             name: modulename,
             dependencies: dependencies,
             factory: factory,
             executed: false
         };
 
-        // Go see if we need to load any dependencies
-        checkDependencies(_moduleRecord[modulename]);
+        // Force the reconciliations to happen asynchronously
+        setTimeout(function () {
+            // Go see if we need to load any dependencies
+            checkDependencies(_definedModules[modulename]);
 
-        // Try to run any non executed modules
-        for (var md in _moduleRecord) {
-            var mdl = _moduleRecord[md];
-            if (!mdl.executed) {
-                runModule(md);
+            // Try to run any non executed modules
+            for (var md in _definedModules) {
+                var mdl = _definedModules[md];
+                if (!mdl.executed && _requiredModules[md]) {
+                    runModule(md);
+                }
             }
-        }
+        }, 0);
 
     };
 
@@ -148,7 +151,7 @@
      * @param modulename
      */
     var runModule = function (modulename) {
-        var md = _moduleRecord[modulename];
+        var md = _definedModules[modulename];
         if (!md) return false;
         if (!md.executed && !_runmodules[md.name]) {
             for (var dep in md.dependencies) {
@@ -160,7 +163,7 @@
             md.executed = true;
             var argList = [];
             for (var depq in md.dependencies) {
-                argList.push(_moduleRecord[md.dependencies[depq]].exports);
+                argList.push(_definedModules[md.dependencies[depq]].exports);
             }
             md.exports = md.factory.apply(window, argList);
         }
@@ -182,15 +185,14 @@
      * @type {{}}
      * @private
      */
-    var _retrievedModules = {};
+    var _requiredModules = {};
 
     /**
      * Defines a special require method that takes advantage of the preloading sequence
      * @type {*}
      */
     var answersRequire = function (modulename) {
-        if (!_retrievedModules[modulename]) {
-            _retrievedModules[modulename] = true;
+        if (!_requiredModules[modulename] && !_definedModules[modulename]) {
             var d = document,
                 w = window,
                 am = d.createElement('script'),
@@ -215,5 +217,6 @@
                 }
             }
         }
+        _requiredModules[modulename] = true;
     };
 })()

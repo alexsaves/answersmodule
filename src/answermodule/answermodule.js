@@ -15,7 +15,8 @@ window["AnswersML"] = AnswersML = (function () {
 
         // Loop over the config and test all the rules
         for (var prod in AnswersProductWhitelist) {
-            if (AnswersProductWhitelist[prod].check === true || AnswersProductWhitelist[prod].check(config)) {
+            var prd = AnswersProductWhitelist[prod];
+            if (prd.check === true || (typeof(prd.check) == 'function' && prd.check(config))) {
                 answersRequire(prod);
             }
         }

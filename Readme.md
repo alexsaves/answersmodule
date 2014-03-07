@@ -1,16 +1,30 @@
 # Answers Sample Module Loader
 
-This a possible approach for delivering a number of client-side products, and possible approaches for configuring those products.
+This demonstrates two possible approaches for delivering a number of client-side products, and possible approaches for configuring those products.
 
-This prototype uses the [AMD](http://en.wikipedia.org/wiki/Asynchronous_module_definition) pattern to define products and dependencies. Rather than rolling our code into a single (large) payload, we benefit from some degree of parallelism, and only retrieve the products we need on the pages we need them on.
+This prototype uses the [AMD](http://en.wikipedia.org/wiki/Asynchronous_module_definition) pattern to define products and dependencies. It supports two use cases: parallel loading, and a monolith payload.
 
-Here's the general architecture of the gateway script:
+## Limitations of this example
+
+**This isn't a polished product**. I've made some comprimises for the sake of being able to demonstrate both parallel loading and a monolith payload. One that that's glaringly missing from this demo is any `domready` governing. It's possible we'd run into some race conditions on some machines, particularly IE without this.
+
+The point of this project to to illustrate a couple approaches as a conversation piece. Once we settle on an approach, or if we formally decide to do both, we would take the time to improve this system.
+
+## Parallel AMD
+
+In this case, rather than rolling our code into a single (large) payload, we benefit from some degree of parallelism, and only retrieve the products we need on the pages we need them on.
+
+Here's the general architecture of the gateway script for this scenario:
 
 ![Overall Architecture](https://raw.github.com/alexsaves/answersmodule/master/assets/uber_arch1.png)
 
 The individual modules below the gateway script are meant to be parallel requests. What isn't shown in this diagram is the resolution of interdependencies between these modules. Here is a workflow showing the basic flow:
 
 ![Workflow](https://raw.github.com/alexsaves/answersmodule/master/assets/uber_workflow1.png)
+
+## Monolith AMD
+
+In this case, we've kept the AMD pattern, but are rolling all the files into a single file. We still only execute the factories that apply to that configuration.
 
 ## Rollups vs parallel loading
 
@@ -50,15 +64,12 @@ Here's a performance comparison with large (jQuery Sized) and small (less than 1
 
 The benefits of parallelism increase with the size of the files involved.
 
-## Limitations of this example
-
-This isn't a polished product. One that that's glaringly missing from this demo is any `domready` governing. It's possible we'd run into some race conditions on some machines, particularly IE without this.
-
-The point of this project to to illustrate an approach as a conversation piece.
-
 ## Building this project
 
-You'll need NodeJS and `npm`. Pull down the repo and install the dependencies (`sudo npm install`). Then you can build to the dist/ folder by running the default gulp task: `gulp`.
+You'll need NodeJS and `npm`. Pull down the repo and install the dependencies (`sudo npm install`). Then you can build one of the two examples using the appropriate gulp tasks:
+
+ * `gulp parallel` - Build the parallel loading example.
+ * `gulp monolith` - Build the single-file version.
 
 When the web server is running, point your browser at `http://localhost:3131/test.html`.
 

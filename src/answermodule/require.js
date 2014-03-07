@@ -4,15 +4,14 @@
  * @type {{}}
  * @private
  */
-var _retrievedModules = {};
+var _requiredModules = {};
 
 /**
  * Defines a special require method that takes advantage of the preloading sequence
  * @type {*}
  */
 var answersRequire = function(modulename) {
-    if (!_retrievedModules[modulename]) {
-        _retrievedModules[modulename] = true;
+    if (!_requiredModules[modulename] && !_definedModules[modulename]) {
         var d = document,
             w = window,
             am = d.createElement('script'),
@@ -37,4 +36,5 @@ var answersRequire = function(modulename) {
             }
         }
     }
+    _requiredModules[modulename] = true;
 };

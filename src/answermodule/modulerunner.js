@@ -10,7 +10,7 @@ var _runmodules = {};
  * @param modulename
  */
 var runModule = function(modulename) {
-    var md = _moduleRecord[modulename];
+    var md = _definedModules[modulename];
     if (!md)
         return false;
     if (!md.executed && !_runmodules[md.name]) {
@@ -24,7 +24,7 @@ var runModule = function(modulename) {
         md.executed = true;
         var argList = [];
         for (var depq in md.dependencies) {
-            argList.push(_moduleRecord[md.dependencies[depq]].exports);
+            argList.push(_definedModules[md.dependencies[depq]].exports);
         }
         md.exports = md.factory.apply(window, argList);
     }
