@@ -4,11 +4,20 @@ This demonstrates two possible approaches for delivering a number of client-side
 
 This prototype uses the [AMD](http://en.wikipedia.org/wiki/Asynchronous_module_definition) pattern to define products and dependencies. It supports two use cases: parallel loading, and a monolith payload.
 
-## Limitations of this example
+## Disclaimer
 
-**This isn't a polished product**. I've made some comprimises for the sake of being able to demonstrate both parallel loading and a monolith payload. One that that's glaringly missing from this demo is any `domready` governing. It's possible we'd run into some race conditions on some machines, particularly IE without this.
+I'd like to emphasize, that these are only two possible approaches. There are other ways to do this, and we should be open to all of them at this early stage.
+
+Also, **this isn't a polished product**. I've made some comprimises for the sake of being able to demonstrate both parallel loading and a monolith payload. One that that's glaringly missing from this demo is any `domready` governing. It's possible we'd run into some race conditions on some machines, particularly IE without this.
 
 The point of this project to to illustrate a couple approaches as a conversation piece. Once we settle on an approach, or if we formally decide to do both, we would take the time to improve this system.
+
+
+## Why AMD?
+
+Until we truly have a unified JavaScript, we'll probably want to consider issues like scope isolation and interfaces. Our respective code bases may look very different, but AMD offers an industry standard way of packaging them without leaking all over each other - and forces us to define clear interfaces with each other.
+
+Also, ForeSee started packaging their code as AMD modules a few months ago, due to several requests from customers. If we stick with this paradigm, irrespective of whether we roll all the code into a single file or not, we can have some flexibility in how we package it and give it to customers.
 
 ## Parallel AMD
 
