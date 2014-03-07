@@ -48,6 +48,8 @@ Here's a performance comparison with large (jQuery Sized) and small (less than 1
 
 ![Performance Test AMD](https://raw.github.com/alexsaves/answersmodule/master/assets/comparison.png)
 
+The benefits of parallelism increase with the size of the files involved.
+
 ## Limitations of this example
 
 This isn't a polished product. One that that's glaringly missing from this demo is any `domready` governing. It's possible we'd run into some race conditions on some machines, particularly IE without this.
