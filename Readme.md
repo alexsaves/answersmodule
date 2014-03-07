@@ -60,7 +60,7 @@ It's important to note these are **per-hostname** limits. They're set as much to
  * Works less well for many tiny files (unless you are using SPDY)
  * Bad optics of having "many requests"
 
-Here's a performance comparison with large (jQuery Sized) and small (less than 1kb) files loaded with parallel and synchronous AMD:
+Here's a performance comparison with large (jQuery Sized) and small (less than 1kb) files loaded with parallel and synchronous AMD. The vertical axis is in seconds of load-time:
 
 ![Performance Test AMD](https://raw.github.com/alexsaves/answersmodule/master/assets/comparison.png)
 
@@ -74,6 +74,14 @@ You'll need NodeJS and `npm`. Pull down the repo and install the dependencies (`
  * `gulp monolith` - Build the single-file version.
 
 When the web server is running, point your browser at `http://localhost:3131/test.html`.
+
+## Contents of the /dist folder
+
+In dist we have:
+
+    test.html - A test harness demonstrating a couple different paradigms for embedding content and activating products.
+    answermodule.js - The gateway script. This is the main script loaded by the page in all cases.
+    modules/ - This folder contains the modules we're going to load.
 
 ## Embedding the Gateway Script
 
@@ -113,14 +121,6 @@ For this example, the customer would embed the somewhat verbose asynchronous emb
 Notice what's going on here. At the top, we have a small configuration block, which is totally optional. This isn't the only way we can activate or turn on modules, but it was one use-case expressed by Eilon.
 
 The rest of the code does the job of inserting an async script tag in a non-blocking and backwards compatible way.
-
-## Contents of the /dist folder
-
-In dist we have:
-
-    test.html - A test harness demonstrating a couple different paradigms for embedding content and activating products.
-    answermodule.js - The gateway script. This is the main script loaded by the page in all cases.
-    modules/ - This folder contains the modules we're going to load.
 
 ## Customer-specific configuration
 
