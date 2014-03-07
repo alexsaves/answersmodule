@@ -12,6 +12,23 @@ Also, **this isn't a polished product**. I've made some comprimises for the sake
 
 The point of this project to to illustrate a couple approaches as a conversation piece. Once we settle on an approach, or if we formally decide to do both, we would take the time to improve this system.
 
+## Building this project
+
+You'll need NodeJS and `npm`. Pull down the repo and install the dependencies (`sudo npm install`). Then you can build one of the two examples using the appropriate gulp tasks:
+
+ * `gulp parallel` - Build the parallel loading example.
+ * `gulp rollup` - Build the single-file version.
+
+When the web server is running, point your browser at `http://localhost:3131/test.html`.
+
+## Contents of the /dist folder
+
+In dist we have:
+
+    test.html - A test harness demonstrating a couple different paradigms for embedding content and activating products.
+    answermodule.js - The gateway script. This is the main script loaded by the page in all cases.
+    modules/ - This folder contains the modules we're going to load.
+
 ## Why AMD?
 
 Until we truly have a unified JavaScript, we'll probably want to consider issues like scope isolation and interfaces. Our respective code bases may look very different, but AMD offers an industry standard way of packaging them without leaking all over each other - and forces us to define clear interfaces with each other.
@@ -93,23 +110,6 @@ Here's a performance comparison with large (jQuery Sized) and small (less than 1
 ![Performance Test AMD](https://raw.github.com/alexsaves/answersmodule/master/assets/comparison.png)
 
 The benefits of parallelism increase with the size of the files involved.
-
-## Building this project
-
-You'll need NodeJS and `npm`. Pull down the repo and install the dependencies (`sudo npm install`). Then you can build one of the two examples using the appropriate gulp tasks:
-
- * `gulp parallel` - Build the parallel loading example.
- * `gulp rollup` - Build the single-file version.
-
-When the web server is running, point your browser at `http://localhost:3131/test.html`.
-
-## Contents of the /dist folder
-
-In dist we have:
-
-    test.html - A test harness demonstrating a couple different paradigms for embedding content and activating products.
-    answermodule.js - The gateway script. This is the main script loaded by the page in all cases.
-    modules/ - This folder contains the modules we're going to load.
 
 ## Embedding the Gateway Script
 
