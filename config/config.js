@@ -3,7 +3,7 @@
  */
 AnswersProductWhitelist = {
 
-    webcollage: {
+    "webcollage": {
         /**
          * Checks to see if this page has this product or not
          * @param config
@@ -14,7 +14,7 @@ AnswersProductWhitelist = {
         }
     },
 
-    youtube: {
+    "youtube": {
         /**
          * Checks to see if this page has this product or not
          * @param config
@@ -25,7 +25,7 @@ AnswersProductWhitelist = {
         }
     },
 
-    foreseecxreplay: {
+    "foreseecxreplay": {
         /**
          * In this case it just says it has it
          */

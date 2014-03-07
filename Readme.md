@@ -159,7 +159,7 @@ When the `answermodule.js` gets build, we assemble the `config/config.js` custom
      */
     AnswersProductWhitelist = {
 
-        webcollage: {
+        "webcollage": {
             /**
              * Checks to see if this page has this product or not
              * @param config
@@ -170,7 +170,7 @@ When the `answermodule.js` gets build, we assemble the `config/config.js` custom
             }
         },
 
-        youtube: {
+        "youtube": {
             /**
              * Checks to see if this page has this product or not
              * @param config
@@ -181,7 +181,7 @@ When the `answermodule.js` gets build, we assemble the `config/config.js` custom
             }
         },
 
-        foreseecxreplay: {
+        "foreseecxreplay": {
             /**
              * In this case it just says it has it
              */
