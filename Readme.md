@@ -33,6 +33,21 @@ Max concurrent connections **per hostname** by browser:
 
 It's important to note these are **per-hostname** limits. They're set as much to protect web servers as they are to help surfers. Given these assets will all be coming from a specific hostname (separate from our customers), we can assume we'll have all of them.
 
+### Advantages of Parallel AMD
+
+ * Works better for several larger files
+ * Allows for for loading only the products you need on the pages you need
+ * Good optics of having "smaller files"
+
+### Disadvantages of Parallel AMD
+
+ * Works less well for many tiny files (unless you are using SPDY)
+ * Bad optics of having "many requests"
+
+Here's a performance comparison with large (jQuery Sized) and small (less than 1kb) files loaded with parallel and synchronous AMD:
+
+![Performance Test AMD](https://raw.github.com/alexsaves/answersmodule/master/assets/comparison.png)
+
 ## Limitations of this example
 
 This isn't a polished product. One that that's glaringly missing from this demo is any `domready` governing. It's possible we'd run into some race conditions on some machines, particularly IE without this.
