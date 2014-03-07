@@ -55,6 +55,8 @@ In this case, we've kept the AMD pattern, but are rolling all the files into a s
 
 ![Overall Architecture](https://raw.github.com/alexsaves/answersmodule/master/assets/monolith.png)
 
+The difference between this and simply concatenating all our JavaScript into a single file in the right order is that we're still benefiting from the scope isolation offered by AMD, and only executing the constructors for the packages that apply to this customer on this page.
+
 ## Rollups vs parallel loading
 
 One question is, should we be combining and minifying all the payloads together, or loading them separately. A couple of points to be made here:
