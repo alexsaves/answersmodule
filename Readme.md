@@ -1,4 +1,4 @@
-# Answers Sample Module Loader
+# Answers Gateway Script Demo
 
 This demonstrates two possible approaches for delivering a number of client-side products, and possible approaches for configuring those products.
 
