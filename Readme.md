@@ -85,7 +85,7 @@ It's important to note these are **per-hostname** limits. They're set as much to
 
 ### Disadvantages of Parallel AMD
 
- * Works less well for many tiny files (unless you are using SPDY)
+ * Works less well for many tiny files
  * Bad optics of having "many requests"
 
 Here's a performance comparison with large (jQuery Sized) and small (less than 1kb) files loaded with parallel and synchronous AMD. The vertical axis is in seconds of load-time:
