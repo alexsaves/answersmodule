@@ -202,7 +202,7 @@ So one of our examples, let's look at `foreseecxreplay`:
 
 It's pretty each to see what's going on here. The module `foreseecxreplay` depends on `foreseetrigger`. The module loader will resolve these dependencies before calling the factory.
 
-## Looking at the demo
+## Parallel AMD Demo
 
 Without any optimizations, what you would see with this demo, if you looked at the network activity would be something like this:
 
@@ -228,6 +228,12 @@ Notice that all the modules are loaded in parallel except for `foreseetrigger.js
 This is not required, but will speed up retrieval. This is a technique used by [RequireJS](https://github.com/jrburke/requirejs). Here's the new netstat:
 
 ![Optimized Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/timeline2.png)
+
+## Monolith AMD Demo
+
+Without any optimizations, what you would see with this demo, if you looked at the network activity would be something like this:
+
+![Monolith Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/monolithperf.png)
 
 ## Cacheing
 

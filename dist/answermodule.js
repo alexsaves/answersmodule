@@ -30,7 +30,7 @@
             /**
              * In this case it just says it has it
              */
-            check: false
+            check: true
         }
     };
     /**
@@ -219,4 +219,71 @@
         }
         _requiredModules[modulename] = true;
     };
+    /**
+     * Module for handling foresee cxreplay
+     */
+    define("foreseecxreplay", ["foreseetrigger"], function (ForeSeeTrigger) {
+
+        console.log("running foresee cxreplay yah", AnswersML, ForeSeeTrigger);
+
+    });
+    /**
+     * Module for handling foresee trigger
+     */
+    define("foreseetrigger", function () {
+
+        var FSR = {};
+
+        console.log("running foresee trig", AnswersML);
+
+        return FSR;
+
+    });
+    /**
+     * Module for embedding a webcollage powerpage
+     */
+    define("webcollage", function () {
+
+        console.log("running webcollage", AnswersML);
+
+        var webcollagenodes = document.querySelectorAll("*[role=webcollage]");
+
+        for (var i = 0; i < webcollagenodes.length; i++) {
+            var nd = webcollagenodes[i],
+                action = nd.getAttribute("action"),
+                data = nd.getAttribute("data");
+
+            switch (action) {
+            case "powerpage":
+                nd.innerHTML = "<h2>Put powerpage here: " + data + "</h2>";
+                break;
+            default:
+                nd.innerHTML = "<h2>Put some content here: " + data + "</h2>";
+                break;
+            }
+
+
+
+        }
+    });
+    /**
+     * Module for embedding a youtube video
+     */
+    define("youtube", function () {
+
+        console.log("running youtube");
+
+        var youtubenodes = document.querySelectorAll("*[role=youtube]");
+
+        for (var i = 0; i < youtubenodes.length; i++) {
+            var embednode = document.createElement("iframe");
+            embednode.width = 640;
+            embednode.height = 390;
+            embednode.src = "//www.youtube.com/embed/" + youtubenodes[i].getAttribute("data");
+            embednode.frameBorder = 0;
+            embednode.allowFullScreen = true;
+            //youtubenodes[i].appendChild(embednode);
+        }
+
+    });
 })()
