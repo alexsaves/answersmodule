@@ -19,7 +19,7 @@ You'll need NodeJS and `npm`. Pull down the repo and install the dependencies (`
  * `gulp parallel` - Build the parallel loading example.
  * `gulp rollup` - Build the single-file version.
 
-When the web server is running, point your browser at `http://localhost:3131/test.html`.
+The gulp task will start a web server automatically. When this is running, point your browser at `http://localhost:3131/test.html`.
 
 ## Contents of the /dist folder
 
