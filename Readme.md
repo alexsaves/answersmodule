@@ -14,7 +14,7 @@ The point of this project to to illustrate a couple approaches as a conversation
 
 ## Building this project
 
-You'll need NodeJS and `npm`. Pull down the repo and install the dependencies (`sudo npm install`). Then you can build one of the two examples using the appropriate gulp tasks:
+You'll need NodeJS and `npm`. Pull down the repo and install the dependencies (`sudo npm install`). Then, install gulp globally with `sudo npm install -g gulp`. Then you can build one of the two examples using the appropriate gulp tasks:
 
  * `gulp parallel` - Build the parallel loading example.
  * `gulp rollup` - Build the single-file version.
@@ -107,7 +107,7 @@ It's important to note these are **per-hostname** limits. They're set as much to
 
 Here's a performance comparison with large (jQuery Sized) and small (less than 1kb) files loaded with parallel and synchronous AMD. The vertical axis is in seconds of load-time:
 
-![Performance Test AMD](https://raw.github.com/alexsaves/answersmodule/master/assets/comparison.png)
+![Performance Test AMD](https://github.com/alexsaves/answersmodule/blob/master/assets/comparison.png?raw=true)
 
 The benefits of parallelism increase with the size of the files involved.
 
@@ -215,11 +215,11 @@ It will notice this and return `true`. I'll talk more about this further down.
 
 Without any optimizations, what you would see with this demo, if you looked at the network activity would be something like this:
 
-![Unoptimized Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/timeline1.png)
+![Unoptimized Network Traffic](https://github.com/alexsaves/answersmodule/blob/master/assets/timeline1.png?raw=true)
 
 Even though the request for `foreseetrigger.js` occurs **after** `foreseecxreplay.js`, the dependency order is reverse. Fortunately, because of the require dependencies, the execution order is correct:
 
-![Console output](https://raw.github.com/alexsaves/answersmodule/master/assets/console.png)
+![Console output](https://github.com/alexsaves/answersmodule/blob/master/assets/console.png?raw=true)
 
 Notice that all the modules are loaded in parallel except for `foreseetrigger.js`. This is because the dependency for this file wasn't encountered until `foreseecxreplay.js` was retrieved. We can optimize this. By providing a prerequisite "hint" object we can pre-retrieve this file. In the demo, I do this by defining prerequisite hints inside `prereqs.js` which gets built into `answermodule.js`.
 
@@ -235,17 +235,17 @@ Notice that all the modules are loaded in parallel except for `foreseetrigger.js
 
 This is not required, but will speed up retrieval. This is a technique used by [RequireJS](https://github.com/jrburke/requirejs). Here's the new netstat:
 
-![Optimized Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/timeline2.png)
+![Optimized Network Traffic](https://github.com/alexsaves/answersmodule/blob/master/assets/timeline2.png?raw=true)
 
 ## Rollup AMD Demo
 
 With all the files rolled into one larger module, the network traffic looks like this.
 
-![Rollup Network Traffic](https://raw.github.com/alexsaves/answersmodule/master/assets/monolithperf.png)
+![Rollup Network Traffic](https://github.com/alexsaves/answersmodule/blob/master/assets/monolithperf.png?raw=true)
 
 Looking at the console log, we see that the same dependencies are being honored.
 
-![Rollup Console Log](https://raw.github.com/alexsaves/answersmodule/master/assets/deplogmonolith.png)
+![Rollup Console Log](https://github.com/alexsaves/answersmodule/blob/master/assets/deplogmonolith.png?raw=true)
 
 ## Cacheing
 
