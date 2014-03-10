@@ -60,17 +60,17 @@ In this case, rather than rolling our code into a single (large) payload, we ben
 
 Here's the general architecture of the gateway script for this scenario:
 
-![Overall Architecture](https://raw.github.com/alexsaves/answersmodule/master/assets/uber_arch1.png)
+![Overall Architecture](https://github.com/alexsaves/answersmodule/blob/master/assets/uber_arch1.png?raw=true)
 
 The individual modules below the gateway script are meant to be parallel requests. What isn't shown in this diagram is the resolution of interdependencies between these modules. Here is a workflow showing the basic flow:
 
-![Workflow](https://raw.github.com/alexsaves/answersmodule/master/assets/uber_workflow1.png)
+![Workflow](https://github.com/alexsaves/answersmodule/blob/master/assets/uber_workflow1.png?raw=true)
 
 ## Rollup AMD
 
 In this case, we've kept the AMD pattern, but are rolling all the files into a single file. We still only execute the factories that apply to that configuration.
 
-![Overall Architecture](https://raw.github.com/alexsaves/answersmodule/master/assets/monolith.png)
+![Overall Architecture](https://github.com/alexsaves/answersmodule/blob/master/assets/monolith.png?raw=true)
 
 The difference between this and simply concatenating all our JavaScript into a single file in the right order is that we're still benefiting from the scope isolation offered by AMD, and only executing the constructors for the packages that apply to this customer on this page.
 
